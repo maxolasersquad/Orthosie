@@ -21,6 +21,7 @@ from django.conf import settings
 from decimal import Decimal
 import time
 from django.core.exceptions import ObjectDoesNotExist
+from printer_interface import Printer
 
 
 class Shift(models.Model):
@@ -273,49 +274,3 @@ class ZReport():
         self.printer.kick_drawer()
         self.printer.cut()
         self.printer.close()
-
-
-class Printer():
-
-    def __init__(self, spool):
-        self.spool = spool
-
-    def open(self):
-        # This is kind of a hacky way to make this work in Python 2.7.
-        # IOError can be raised in situations other than the file (printer)
-        #   not existing so this should probably be tightened up.
-        try:
-            FileNotFoundError
-        except NameError:
-            FileNotFoundError = IOError
-        try:
-            self._printer = open(self.spool, 'w')
-        except FileNotFoundError:
-            raise PrinterNotFound(
-                'Unable to locate printer "' + self.spool + '".'
-            )
-
-    def close(self):
-        self._printer.close()
-
-    def print_line(self, line):
-        self._printer.write(line)
-
-    def cut(self):
-        for i in range(8):
-            self.print_line('\n')
-        self._printer.write(chr(27) + chr(105) + chr(10))
-
-    def kick_drawer(self):
-        self._printer.write(
-            chr(27) + chr(112) + chr(0) + chr(48) + '0' + chr(10)
-        )
-
-
-class PrinterNotFound(Exception):
-
-    def __init__(self, value):
-        self.value = value
-
-    def __str__(self):
-        return self.value
