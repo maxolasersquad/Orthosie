@@ -104,7 +104,11 @@ LOGGING = {
 }
 
 TAX = .075
+
 PRINTER = '/dev/null'
+#PRINTER = {'spool':'/dev/null', 'driver':'orthosie', 'interface':''}
+#PRINTER = {'spool':'192.168.192.168', 'driver':'escpos', 'interface':'network'}
+
 RECEIPT_HEADER = ['Header 1', 'Header 2']
 RECEIPT_FOOTER = ['Footer 1', 'Footer 2']
 
