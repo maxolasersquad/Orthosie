@@ -1,16 +1,6 @@
-<<<<<<< Upstream, based on upstream/master
 from django.shortcuts import render
 from register.models import Transaction
-=======
-from django.shortcuts import render, get_object_or_404
-from register.models import LineItem, Transaction, Shift
->>>>>>> b78ee96 printer: fixed imports
 from inventory.models import Grocery, Produce
-<<<<<<< Upstream, based on upstream/master
-=======
-from libs.printer_interface import PrinterNotFound
-from django.views.decorators.csrf import csrf_exempt
->>>>>>> b78ee96 printer: fixed imports
 
 
 def index(request):
