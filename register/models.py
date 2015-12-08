@@ -21,7 +21,7 @@ from django.conf import settings
 from decimal import Decimal
 import time
 from django.core.exceptions import ObjectDoesNotExist
-from libs.printer_interface import Printer
+from libs.printer_interface import Printer, PrinterNotFound
 
 
 class Shift(models.Model):

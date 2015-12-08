@@ -76,6 +76,13 @@ class OrthosiePrinter(object):
         self._printer = None
 
     def open(self):
+        # This is kind of a hacky way to make this work in Python 2.7.
+        # IOError can be raised in situations other than the file (printer)
+        #   not existing so this should probably be tightened up.
+        try:
+            FileNotFoundError
+        except NameError:
+            FileNotFoundError = IOError
         try:
             self._printer = open(self.spool, 'w')
         except FileNotFoundError:
