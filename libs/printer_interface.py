@@ -26,13 +26,13 @@ class Printer(object):
         try:
             self._printer.open()
         except AttributeError as e:
-            print e
+            print(e)
 
     def close(self):
         try:
             self._printer.close()
         except AttributeError as e:
-            print e
+            print(e)
 
     def print_line(self, line):
         self._printer.print_line(line)
@@ -41,19 +41,19 @@ class Printer(object):
         try:
             self._printer.print_image(image_path)
         except AttributeError as e:
-            print e
+            print(e)
 
     def print_qr(self, text):
         try:
             self._printer.print_qr(text)
         except AttributeError as e:
-            print e
+            print(e)
 
     def print_barcode(self, **kwargs):
         try:
             self._printer.print_barcode(**kwargs)
         except AttributeError as e:
-            print e
+            print(e)
 
     def cut(self, **kwargs):
         self._printer.cut(**kwargs)
@@ -65,7 +65,7 @@ class Printer(object):
         try:
             self._printer.set(**kwargs)
         except AttributeError as e:
-            print e
+            print(e)
 
 
 class OrthosiePrinter(object):
@@ -179,11 +179,9 @@ class PrinterTypeNotSupported(Exception):
 
 if __name__ == '__main__':
     # will use the orthosie driver
-    printer = Printer(
-        {'spool': '/dev/null', 'driver': 'orthosie', 'interface': ''})
+    printer = Printer({'spool': '/dev/null', 'driver': 'orthosie', 'interface': ''})
     printer = Printer('/dev/null')  # will use the orthosie driver
-    printer = Printer({'spool': '192.168.192.168',
-                       'driver': 'escpos', 'interface': 'network'})
+    printer = Printer({'spool': '192.168.192.168', 'driver': 'escpos', 'interface': 'network'})
     kwargs = {'font': 'A', 'align': 'CENTER'}
     printer.set(**kwargs)
     printer.print_line('Hello World!')
