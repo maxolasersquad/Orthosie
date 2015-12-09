@@ -3,7 +3,7 @@ class Printer(object):
 
     def __init__(self, settings):
         if type(settings) is str:  # support for existing settings
-            self.spool = str(settings)  # spool is case sensitive
+            self.spool = settings  # spool is case sensitive
             self.printer_driver = 'ORTHOSIE'
             self._printer = OrthosiePrinter(self.spool)
         else:
@@ -36,6 +36,10 @@ class Printer(object):
     def kick_drawer(self, **kwargs):
         self._printer.kick_drawer(**kwargs)
 
+    def print_line(self, line):
+        self._printer.print_line(line)
+
+    # methods supported by some printer drivers
     def open(self):
         try:
             self._printer.open()
@@ -51,9 +55,6 @@ class Printer(object):
             raise PrinterAttributeError(
                 '"close" is unsupported by printer'
             )
-
-    def print_line(self, line):
-        self._printer.print_line(line)
 
     def print_image(self, image_path):
         try:
@@ -103,6 +104,7 @@ class OrthosiePrinter(object):
             FileNotFoundError
         except NameError:
             FileNotFoundError = IOError
+
         try:
             self._printer = open(self.spool, 'w')
         except FileNotFoundError:
