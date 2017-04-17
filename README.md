@@ -2,6 +2,8 @@
 License
 =======
 
+[![Join the chat at https://gitter.im/maxolasersquad/orthosie](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/maxolasersquad/orthosie?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
     Copyright 2013 Jack David Baucum
 
     This file is part of Orthosie.
